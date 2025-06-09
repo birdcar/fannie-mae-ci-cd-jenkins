@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-      IMAGE_NAME = "${IMAGE_NAME}"
-      CONDA_ENVIRONMENT_NAME = "${CONDA_ENVIRONMENT_NAME}"
+      IMAGE_NAME = "birdcar/ci-cd-demo"
+      CONDA_ENVIRONMENT_NAME = "ci-cd-demo"
     }
     stages {
       stage("Build") {
