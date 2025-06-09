@@ -1,0 +1,26 @@
+name: ci-cd-demo
+channels:
+   # Place whatever channels you want the project to pull from here
+  - https://repo.anaconda.cloud/repo/anaconda-tam/engineering-main
+  # Since this environment will be used by developers as well as in production,
+  # include an msys2-based channel for windows users
+  - https://repo.anaconda.cloud/repo/anaconda-tam/engineering-win
+  # Ensure that 'defaults' channels are not used regardless of environment
+  - nodefaults
+dependencies:
+  - python=3.12
+  - conda-build
+  - typer
+  - loguru
+  - tqdm
+  - ipython
+  - jupyterlab
+  - matplotlib
+  - notebook
+  - numpy
+  - pandas
+  - ruff
+  - pytest
+  - python-dotenv
+  - boto3
+  - awscli
