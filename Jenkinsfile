@@ -36,9 +36,7 @@ pipeline {
 
       stage("Lint") {
         agent {
-            docker {
-                image 'birdcar/ci-cd-demo'
-            }
+            docker 'birdcar/ci-cd-demo'
         }
         steps {
             echo "Linting"
@@ -47,9 +45,7 @@ pipeline {
 
       stage("Test") {
         agent {
-          docker {
-            image "birdcar/ci-cd-demo"
-          }
+          docker "birdcar/ci-cd-demo"
         }
         steps {
           echo "Testing..."
@@ -57,9 +53,8 @@ pipeline {
       }
 
       stage("Deploy") {
-        agent {
-          image "birdcar/ci-cd-demo"
-        }
+        agent "birdcar/ci-cd-demo"
+
         steps {
           echo "Deploying...."
         }
