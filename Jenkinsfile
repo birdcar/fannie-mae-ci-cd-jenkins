@@ -21,10 +21,10 @@ pipeline {
                 }
 
                 def condaContainer = docker.build(
-                  "${DOCKER_IMAGE_NAME}",
+                  "${IMAGE_NAME}",
                   "-f Dockerfile --secret id=conda_token,src=${secretFilePath} ."
                 )
-                echo "Docker image '${DOCKER_IMAGE_NAME}' built successfully"
+                echo "Docker image '${IMAGE_NAME}' built successfully"
 
                 condaContainer.push('latest');
               } finally {
