@@ -1,9 +1,11 @@
 pipeline {
     agent any
+
     environment {
       IMAGE_NAME = "birdcar/ci-cd-demo"
       CONDA_ENVIRONMENT_NAME = "ci-cd-demo"
     }
+
     stages {
       stage("Build") {
         steps {
@@ -18,12 +20,13 @@ pipeline {
                   sh "chmod 400 ${secretFilePath}"
                 }
 
-                docker.build(
+                def condaContainer = docker.build(
                   "${DOCKER_IMAGE_NAME}",
                   "-f Dockerfile --secret id=conda_token,src=${secretFilePath} ."
                 )
-
                 echo "Docker image '${DOCKER_IMAGE_NAME}' built successfully"
+
+                condaContainer.push('latest');
               } finally {
                 if (fileExists(secretFilePath)) {
                   sh "rm -f ${secretFilePath}"
@@ -31,32 +34,6 @@ pipeline {
                 }
               }
             }
-        }
-      }
-
-      stage("Lint") {
-        agent {
-            docker 'birdcar/ci-cd-demo'
-        }
-        steps {
-            echo "Linting"
-        }
-      }
-
-      stage("Test") {
-        agent {
-          docker "birdcar/ci-cd-demo"
-        }
-        steps {
-          echo "Testing..."
-        }
-      }
-
-      stage("Deploy") {
-        agent "birdcar/ci-cd-demo"
-
-        steps {
-          echo "Deploying...."
         }
       }
     }
