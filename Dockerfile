@@ -29,4 +29,3 @@ RUN conda env create -f environment.yml -n "${ENV_NAME}"\
 # Copy your application code
 COPY . .
 
-ENTRYPOINT ["./entrypoint.sh"]
